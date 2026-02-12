@@ -1447,7 +1447,7 @@ const renderAIAdvisor = (preRound, postRound, pricedConversion, state, strictlyP
     const preMoney = state.preMoney;
 
     if (preMoney <= 0 || newMoneyRaised <= 0) {
-        container.innerHTML = `<p class="card-subtext">Insights will appear once you enter your cap table and round terms.</p>`;
+        container.innerHTML = `<p class="card-subtext">Insights will appear once you enter your priced round terms.</p>`;
         return;
     }
 
