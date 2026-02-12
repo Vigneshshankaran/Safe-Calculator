@@ -77,9 +77,8 @@
               <div class="card-title-group">
                 <h2>SAFE terms</h2>
                 <p>
-                  SAFEs must be entered in the order raised. MFN applies forward
-                  only.
-                  <span class="tooltip-trigger">
+                  SAFEs must be entered in the order raised. MFN
+                  <span class="tooltip-trigger tooltip-compact">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -98,6 +97,7 @@
                       SAFEs.</span
                     >
                   </span>
+                  applies forward only.
                 </p>
               </div>
               <button class="btn btn-primary" onclick="addRow('safe')">
@@ -183,7 +183,9 @@
               <label class="field-label">Round name</label>
               <input
                 class="input"
-                value="Series A"
+                id="round-name-input"
+                placeholder="priced round"
+                value=""
                 onchange="updateGlobal('roundName', this.value)"
               />
             </div>
@@ -511,7 +513,7 @@
             <label class="field-label row-field-label">Category</label>
             <select class="select row-category">
               <option value="Founder">Founder</option>
-              <option value="Option Pool">Option Pool</option>
+              <option value="Option pool">Option pool</option>
               <option value="Investor">Investor</option>
               <option value="Other">Other</option>
             </select>

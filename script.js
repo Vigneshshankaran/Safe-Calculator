@@ -608,7 +608,7 @@ State management, updateUI, and chart rendering.
 */
 const INITIAL_STATE = {
     name: "Standalone Worksheet",
-    roundName: "Series A",
+    roundName: "priced round",
     rowData: [
         {
             id: "1",
@@ -765,7 +765,7 @@ const updateUI = () => {
 
         const roundNames = document.querySelectorAll(".display-round-name");
         roundNames.forEach(el => {
-            el.textContent = state.roundName || "Round";
+            el.textContent = state.roundName || "priced round";
         });
 
         const commonShares = state.rowData
@@ -1354,7 +1354,7 @@ const renderBarChart = (preFounderPct, postFounderPct) => {
 
     const labels = [
         ["After SAFE conversion", `Before ${state.roundName}`],
-        ["After SAFE conversion", `After ${state.roundName}`]
+        ["After SAFE conversion", `and ${state.roundName}`]
     ];
     const data = [
         preValid ? preFounderPct * 100 : 0,
@@ -2048,7 +2048,7 @@ const prepareReportData = () => {
         safeAmount: state.rowData.filter(r => r.type === CapTableRowType.Safe).reduce((sum, r) => sum + (r.investment || 0), 0),
         timestamp: timestamp,
         optionPool: state.targetOptionsPool + "%",
-        roundName: state.roundName || "Series A",
+        roundName: state.roundName || "priced round",
         summary: {
             ownershipPre: ownershipPre,
             ownershipPost: founderOwnership,
