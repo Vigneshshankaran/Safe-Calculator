@@ -608,7 +608,7 @@ State management, updateUI, and chart rendering.
 */
 const INITIAL_STATE = {
     name: "Standalone Worksheet",
-    roundName: "priced round",
+    roundName: "Series A",
     rowData: [
         {
             id: "1",
@@ -1353,8 +1353,8 @@ const renderBarChart = (preFounderPct, postFounderPct) => {
     if (!preValid && !postValid) return;
 
     const labels = [
-        ["After SAFE conversion", `Before ${state.roundName}`],
-        ["After SAFE conversion", `and ${state.roundName}`]
+        ["After SAFE conversion", `Before ${state.roundName || "priced round"}`],
+        ["After SAFE conversion", `and ${state.roundName || "priced round"}`]
     ];
     const data = [
         preValid ? preFounderPct * 100 : 0,
@@ -1470,7 +1470,7 @@ const renderAIAdvisor = (preRound, postRound, pricedConversion, state, strictlyP
         const totalFounderPctPost = foundersPost.reduce((a, f) => a + f.ownershipPct, 0);
         const totalFounderPctPre = strictlyPreFounderPct !== undefined ? strictlyPreFounderPct : 0;
 
-        insights.push(`<p>You are modeling a <strong>${state.roundName}</strong> round raising <strong>${investment}</strong> at a <strong>${preMoneyStr}</strong> pre-money valuation. Founder ownership changes from <strong>${safeFormatPercent(totalFounderPctPre)}</strong> to <strong>${safeFormatPercent(totalFounderPctPost)}</strong> post ${state.roundName}.</p>`);
+        insights.push(`<p>You are modeling a <strong>${state.roundName || "priced round"}</strong> round raising <strong>${investment}</strong> at a <strong>${preMoneyStr}</strong> pre-money valuation. Founder ownership changes from <strong>${safeFormatPercent(totalFounderPctPre)}</strong> to <strong>${safeFormatPercent(totalFounderPctPost)}</strong> post ${state.roundName || "priced round"}.</p>`);
 
         const safesCount = state.rowData.filter(r => r.type === CapTableRowType.Safe).length;
         const totalSafeInvestment = state.rowData
@@ -1490,7 +1490,7 @@ const renderAIAdvisor = (preRound, postRound, pricedConversion, state, strictlyP
         if (pricedConversion.increaseInOptionsPool > 0) {
             insights.push(`
                 <div class="insight-item">
-                    <div>The model includes an option pool top-up to reach the target of <strong>${state.targetOptionsPool}%</strong>, which issued additional shares pre ${state.roundName}.</div>
+                    <div>The model includes an option pool top-up to reach the target of <strong>${state.targetOptionsPool}%</strong>, which issued additional shares pre ${state.roundName || "priced round"}.</div>
                 </div>
             `);
         }
