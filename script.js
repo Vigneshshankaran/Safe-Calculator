@@ -1421,16 +1421,23 @@ const renderBarChart = (preFounderPct, postFounderPct) => {
                 }
             },
             layout: {
-                padding: { top: 20, bottom: 25, left: 10, right: 10 }
+                padding: { top: 20, bottom: 40, left: 10, right: 10 }
             }
-        }
+        },
+        plugins: [{
+            id: 'summaryText',
+            afterDraw: (chart) => {
+                const { ctx, chartArea: { left, width, bottom } } = chart;
+                ctx.save();
+                ctx.font = '500 14px Inter, sans-serif';
+                ctx.fillStyle = '#444266';
+                ctx.textAlign = 'center';
+                const text = `${(preFounderPct * 100).toFixed(1)}% → ${(postFounderPct * 100).toFixed(1)}%`;
+                ctx.fillText(text, left + width / 2, bottom + 75);
+                ctx.restore();
+            }
+        }]
     });
-
-
-    const summaryText = document.createElement("div");
-    summaryText.className = "chart-summary-text";
-    summaryText.innerHTML = `${(preFounderPct * 100).toFixed(1)}% &rarr; ${(postFounderPct * 100).toFixed(1)}%`;
-    container.appendChild(summaryText);
 };
 
 
