@@ -1350,6 +1350,9 @@ td:not(:first-child) {
 .text-muted {
   color: rgba(100, 116, 139, 0.6);
 } /* text-muted-foreground/60 */
+.disclosure-note {
+  font-size: 0.6rem;
+}
 .text-dark {
   color: #0f172a;
 } /* text-foreground */
@@ -3186,7 +3189,13 @@ table .percentage-input-wrapper .percentage-suffix {
   }
 }
 
-
+.muted-text p{
+    font-size: 0.5rem;
+    color: rgb(107, 114, 128);
+    margin-top: 0.75rem;
+    font-style: italic;
+    padding: 0px 0.5rem;
+}
 
 .insight-danger {
   color: #dc2626;

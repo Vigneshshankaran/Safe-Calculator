@@ -224,7 +224,7 @@ const checkSafeNotesForErrors = (safeNotes) => {
 /**
  * Core algebraic solver for the Price Per Share (PPS).
  * Uses the formula: PPS = (Pre-Money + New Investment) / (Total Post-Money Shares)
- * This function accounts for dilution from SAFEs and Option Pool top-ups.
+ * This function accounts for dilution from SAFEs and Option pool top-ups.
  */
 const calculatePreAndPostMoneyShares = (
     preMoneyValuation,
@@ -268,8 +268,8 @@ const attemptFit = (preMoneyValuation, commonShares, unusedOptions, targetOption
 
 /**
  * Iterative "FIT" solver to handle circular dependencies.
- * In many startup rounds, the Option Pool size depends on the Post-Money Valuation,
- * which in turn depends on the Price Per Share, which depends on the Option Pool size.
+ * In many startup rounds, the Option pool size depends on the Post-Money Valuation,
+ * which in turn depends on the Price Per Share, which depends on the Option pool size.
  * This function runs multiple iterations to converge on the mathematically correct PPS.
  */
 const fitConversion = (
@@ -627,9 +627,9 @@ const INITIAL_STATE = {
         {
             id: "UnusedOptionsPool",
             type: "common",
-            name: "Option Pool",
+            name: "Option pool",
             shares: 2000000,
-            category: "Option Pool",
+            category: "Option pool",
         },
         {
             id: "3",
@@ -1126,8 +1126,8 @@ const getRowData = (data) => {
     if (data.refreshedOptionsPool && data.refreshedOptionsPool.shares > 0) {
         rows.push({
             id: "UnusedOptionsPool",
-            name: "Option Pool",
-            category: "Option Pool",
+            name: "Option pool",
+            category: "Option pool",
             shares: data.refreshedOptionsPool.shares || 0,
             ownershipPct: data.refreshedOptionsPool.ownershipPct || 0,
             isPricedOrSafe: false,
@@ -1232,7 +1232,7 @@ const renderPieChart = (postRound) => {
     const categoryPalettes = {
         "Founder": ["#5F17EA", "#7C3AED", "#9333EA", "#A855F7", "#C084FC", "#D8B4FE"],
         "Investor": ["#3B82F6", "#60A5FA", "#93C5FD", "#BFDBFE", "#2563EB", "#1D4ED8"],
-        "Option Pool": ["#FACC15", "#FDE047", "#FEF08A"],
+        "Option pool": ["#FACC15", "#FDE047", "#FEF08A"],
         "Other": ["#64748B", "#94A3B8", "#CBD5E1"]
     };
 
@@ -2031,7 +2031,7 @@ const prepareReportData = () => {
         }
 
         rows.push({
-            name: "Option Pool",
+            name: "Option pool",
             preShares: preOptions,
             postShares: postOptions,
             badge: badge,
