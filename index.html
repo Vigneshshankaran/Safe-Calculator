@@ -209,26 +209,26 @@
       <div class="results-column">
         <section id="results-card">
           <div class="results-layout">
-            <p class="mb-4 text-muted disclosure-note">
-                Note: All “before <span class="display-round-name"></span>” and “after <span class="display-round-name"></span>” figures assume all SAFEs have converted. If there are no SAFEs, the figures reflect the cap table before the priced round.
-            </p>
-            <div class="flex-between mb-4 no-pdf">
-              <div class="founder-outcome-label">
-                Impact of
-                <span class="display-round-name"></span>
-                on founder(s)
-              </div>
+            <div class="flex justify-end mb-4 no-pdf">
               <div class="export-actions-mini">
                 <button class="btn-mini-export primary" onclick="downloadPDF()">
-                  Download
+                  Download report
                 </button>
                 <button
                   class="btn-mini-export secondary"
                   onclick="showEmailModal()"
                 >
-                  Email
+                  Email report
                 </button>
               </div>
+            </div>
+            <p class="mb-4 text-muted disclosure-note">
+                Note: All “before <span class="display-round-name"></span>” and “after <span class="display-round-name"></span>” figures assume all SAFEs have converted. If there are no SAFEs, the figures reflect the cap table before the priced round.
+            </p>
+            <div class="founder-outcome-label mb-4">
+                Impact of
+                <span class="display-round-name"></span>
+                on founder(s)
             </div>
             <div class="main-stats-grid">
               <div class="stat-large">
@@ -448,10 +448,8 @@
       <div class="modal-dialog">
         <div class="modal-header">
           <div>
-            <h3 class="modal-title">E-mail Report</h3>
-            <p class="modal-subtitle">
-              We'll send a detailed PDF to your inbox.
-            </p>
+            <h3 class="modal-title">Get your copy now</h3>
+           
           </div>
           <button class="modal-close" onclick="hideEmailModal()">
             &times;
@@ -463,24 +461,48 @@
               <label class="field-label">First Name</label>
               <input
                 type="text"
-                id="name-input"
+                id="first-name-input"
                 class="input"
-                placeholder="Enter your first name"
+                placeholder="First Name"
               />
             </div>
             <div class="input-group">
-              <label class="field-label">Email Address</label>
+              <label class="field-label">Last Name</label>
+              <input
+                type="text"
+                id="last-name-input"
+                class="input"
+                placeholder="Last Name"
+              />
+            </div>
+            <div class="input-group full-width">
+              <label class="field-label">Work Email</label>
               <input
                 type="email"
                 id="email-input"
                 class="input"
-                placeholder="founder@example.com"
+                placeholder="work@company.com"
               />
               <span
                 id="email-error"
                 class="error-msg"
                 style="display: none"
               ></span>
+            </div>
+            <div class="input-group full-width">
+              <label class="field-label">Company Name</label>
+              <input
+                type="text"
+                id="company-input"
+                class="input"
+                placeholder="Company Name"
+              />
+            </div>
+            <div class="checkbox-group no-pdf full-width">
+              <label class="checkbox-container">
+                <input type="checkbox" id="newsletter-checkbox" checked />
+                <span class="checkbox-label">Send me newsletter and updates</span>
+              </label>
             </div>
           </div>
           <div class="modal-footer-actions">

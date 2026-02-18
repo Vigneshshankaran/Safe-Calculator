@@ -2075,8 +2075,8 @@ window.downloadPDF = async function() {
         showToast('Generating report...', 'success');
         const reportData = prepareReportData();
 
-        console.log("Fetching from backend at http://127.0.0.1:3005/generate-pdf...");
-        const response = await fetch('http://127.0.0.1:3005/generate-pdf', {
+        console.log("Fetching from backend at http://127.0.0.1:3006/generate-pdf...");
+        const response = await fetch('http://127.0.0.1:3006/generate-pdf', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ reportData })
@@ -2122,15 +2122,21 @@ window.downloadPDF = async function() {
 
 
 window.sendEmailWithPDF = async function() {
-    const nameInput = document.getElementById('name-input');
+    const firstNameInput = document.getElementById('first-name-input');
+    const lastNameInput = document.getElementById('last-name-input');
     const emailInput = document.getElementById('email-input');
+    const companyInput = document.getElementById('company-input');
+    const newsletterCheckbox = document.getElementById('newsletter-checkbox');
     const errorSpan = document.getElementById('email-error');
     const sendBtn = document.getElementById('send-email-btn');
     const btnText = document.getElementById('send-btn-text');
     const btnLoader = document.getElementById('send-btn-loader');
     
-    const firstName = nameInput ? nameInput.value.trim() : '';
+    const firstName = firstNameInput ? firstNameInput.value.trim() : '';
+    const lastName = lastNameInput ? lastNameInput.value.trim() : '';
     const email = emailInput.value.trim();
+    const company = companyInput ? companyInput.value.trim() : '';
+    const subscribe = newsletterCheckbox ? newsletterCheckbox.checked : false;
     
     if (!email || !validateEmail(email)) {
         errorSpan.textContent = 'Please enter a valid email address';
@@ -2151,6 +2157,9 @@ window.sendEmailWithPDF = async function() {
             reportData: reportData,
             summaryData: {
                 firstName: firstName || 'there',
+                lastName: lastName,
+                companyName: company,
+                subscribe: subscribe,
                 founderOwnership: reportData.summary.ownershipPost,
                 founderDilution: reportData.summary.dilution,
                 postMoney: reportData.summary.postMoney,
@@ -2160,7 +2169,7 @@ window.sendEmailWithPDF = async function() {
 
         showToast('Sending...', 'success');
 
-        const emailResponse = await fetch('http://127.0.0.1:3005/send-email', {
+        const emailResponse = await fetch('http://127.0.0.1:3006/send-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

@@ -3094,9 +3094,34 @@ table .percentage-input-wrapper .percentage-suffix {
 
 .modal-form-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin-bottom: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.input-group.full-width {
+  grid-column: span 2;
+}
+
+.checkbox-group {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 
 .modal-footer-actions {
@@ -3240,12 +3265,31 @@ table .percentage-input-wrapper .percentage-suffix {
 }
 
 .bar-chart-container,
-.chart-wrapper-bar {
+.chart-wrapper-bar,
+.donut-container,
+.chart-wrapper-pie {
   width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+@media (max-width: 1383px) {
+  .results-charts-row {
+    flex-wrap: wrap !important;
+    gap: 2rem !important;
+  }
+  .chart-column {
+    flex: 1 1 320px !important;
+    min-width: 320px !important;
+  }
+  .bar-chart-container,
+  .chart-wrapper-bar,
+  .donut-container,
+  .chart-wrapper-pie {
+    min-height: 350px !important;
+  }
 }
 
 @media (max-width: 1024px) {
