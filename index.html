@@ -448,7 +448,7 @@
       <div class="modal-dialog">
         <div class="modal-header">
           <div>
-            <h3 class="modal-title">Get your copy now</h3>
+            <h3 class="modal-title" id="modal-title">Get your copy of ownership report on email</h3>
            
           </div>
           <button class="modal-close" onclick="hideEmailModal()">
@@ -458,7 +458,7 @@
         <div class="modal-body">
           <div class="modal-form-grid">
             <div class="input-group">
-              <label class="field-label">First Name</label>
+              <label class="field-label">First name</label>
               <input
                 type="text"
                 id="first-name-input"
@@ -467,7 +467,7 @@
               />
             </div>
             <div class="input-group">
-              <label class="field-label">Last Name</label>
+              <label class="field-label">Last name</label>
               <input
                 type="text"
                 id="last-name-input"
@@ -476,7 +476,7 @@
               />
             </div>
             <div class="input-group full-width">
-              <label class="field-label" id="recipient-label">Work Email(s)</label>
+              <label class="field-label" id="recipient-label">Work email(s)</label>
               <div id="email-recipients-list">
                 <div class="recipient-row" id="recipient-row-0">
                   <input
@@ -502,7 +502,7 @@
               ></span>
             </div>
             <div class="input-group full-width">
-              <label class="field-label">Company Name</label>
+              <label class="field-label">Company name</label>
               <input
                 type="text"
                 id="company-input"
@@ -514,12 +514,11 @@
               <label class="checkbox-container">
                 <input type="checkbox" id="newsletter-checkbox" checked />
                 <span class="checkbox-label"
-                  >I would like to receive equity list updates from newspapers</span
+                  >I'd like to receive news and updates from EquityList</span
                 >
               </label>
               <div class="checkbox-note">
-                You can unsubscribe at any time. Updates are for information
-                purposes only.
+                You can unsubscribe at anytime.
               </div>
             </div>
           </div>
@@ -529,7 +528,7 @@
               class="btn btn-primary w-full justify-center"
               onclick="sendEmailWithPDF()"
             >
-              <span id="send-btn-text">Send Report</span>
+              <span id="send-btn-text">Send the report</span>
               <div
                 id="send-btn-loader"
                 style="display: none"

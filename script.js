@@ -2149,13 +2149,18 @@ window.showEmailModal = function(mode = 'email') {
     const btnText = document.getElementById('send-btn-text');
     const recipientLabel = document.getElementById('recipient-label');
     const addRecipientBtn = document.getElementById('add-recipient-btn');
+    const modalTitle = document.getElementById('modal-title');
 
     if (btnText) {
-        btnText.textContent = mode === 'download' ? 'Download Report' : 'Send Report';
+        btnText.textContent = mode === 'download' ? 'Download Report' : 'Send the report';
+    }
+
+    if (modalTitle) {
+        modalTitle.textContent = mode === 'download' ? 'Get your copy now' : 'Get your copy of ownership report on email';
     }
 
     if (recipientLabel) {
-        recipientLabel.textContent = mode === 'download' ? 'Work Email' : 'Work Email(s)';
+        recipientLabel.textContent = mode === 'download' ? 'Work email' : 'Work email(s)';
     }
 
     if (addRecipientBtn) {
