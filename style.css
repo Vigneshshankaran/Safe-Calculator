@@ -3106,7 +3106,16 @@ table .percentage-input-wrapper .percentage-suffix {
 .checkbox-group {
   grid-column: span 2;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.checkbox-note {
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.4;
+  margin-left: 28px; /* Align with label text */
 }
 
 .checkbox-container {
@@ -3116,6 +3125,55 @@ table .percentage-input-wrapper .percentage-suffix {
   cursor: pointer;
   font-size: 13px;
   color: var(--text-muted);
+}
+
+.recipient-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.recipient-row .input {
+  flex: 1;
+}
+
+.btn-remove-recipient {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-remove-recipient:hover {
+  color: #ef4444;
+  background: #fee2e2;
+}
+
+.btn-add-recipient {
+  background: none;
+  border: none;
+  color: #5f17ea;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  margin-top: 4px;
+  transition: color 0.2s;
+}
+
+.btn-add-recipient:hover {
+  color: #4b11ba;
 }
 
 .checkbox-container input[type="checkbox"] {

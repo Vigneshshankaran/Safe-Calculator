@@ -2120,13 +2120,99 @@ window.downloadPDF = async function() {
     }
 };
 
+let modalMode = 'email'; // 'email' or 'download'
+
+window.showEmailModal = function(mode = 'email') {
+    modalMode = mode;
+    const modal = document.getElementById('email-modal');
+    if (!modal) return;
+    
+    // Reset recipients list to just one if not already
+    const list = document.getElementById('email-recipients-list');
+    if (list) {
+        list.innerHTML = `
+            <div class="recipient-row" id="recipient-row-0">
+                <input
+                    type="email"
+                    class="input email-recipient-input"
+                    placeholder="work@company.com"
+                    required
+                />
+                <button class="btn-remove-recipient" style="visibility: hidden" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                </button>
+            </div>
+        `;
+    }
+
+    // Update button text and recipient options based on mode
+    const btnText = document.getElementById('send-btn-text');
+    const recipientLabel = document.getElementById('recipient-label');
+    const addRecipientBtn = document.getElementById('add-recipient-btn');
+
+    if (btnText) {
+        btnText.textContent = mode === 'download' ? 'Download Report' : 'Send Report';
+    }
+
+    if (recipientLabel) {
+        recipientLabel.textContent = mode === 'download' ? 'Work Email' : 'Work Email(s)';
+    }
+
+    if (addRecipientBtn) {
+        addRecipientBtn.style.display = mode === 'download' ? 'none' : 'inline-flex';
+    }
+    
+    const firstNameInput = document.getElementById('first-name-input');
+    const firstEmailInput = document.querySelector('.email-recipient-input');
+    const errorSpan = document.getElementById('email-error');
+    
+    if (errorSpan) errorSpan.style.display = 'none';
+    modal.style.display = 'flex';
+    
+    setTimeout(() => {
+        if (firstNameInput) firstNameInput.focus();
+        else if (firstEmailInput) firstEmailInput.focus();
+    }, 100);
+};
+
+window.addRecipient = function() {
+    const list = document.getElementById('email-recipients-list');
+    if (!list) return;
+    
+    const id = Date.now();
+    const row = document.createElement('div');
+    row.className = 'recipient-row';
+    row.id = `recipient-row-${id}`;
+    row.innerHTML = `
+        <input
+            type="email"
+            class="input email-recipient-input"
+            placeholder="work@company.com"
+        />
+        <button class="btn-remove-recipient" onclick="removeRecipient('${id}')" type="button" title="Remove recipient">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+        </button>
+    `;
+    list.appendChild(row);
+    row.querySelector('input').focus();
+};
+
+window.removeRecipient = function(id) {
+    const row = document.getElementById(`recipient-row-${id}`);
+    if (row) row.remove();
+};
+
+window.hideEmailModal = function() {
+    const modal = document.getElementById('email-modal');
+    if (modal) modal.style.display = 'none';
+};
 
 window.sendEmailWithPDF = async function() {
     const firstNameInput = document.getElementById('first-name-input');
     const lastNameInput = document.getElementById('last-name-input');
-    const emailInput = document.getElementById('email-input');
     const companyInput = document.getElementById('company-input');
     const newsletterCheckbox = document.getElementById('newsletter-checkbox');
+    const emailInputs = document.querySelectorAll('.email-recipient-input');
     const errorSpan = document.getElementById('email-error');
     const sendBtn = document.getElementById('send-email-btn');
     const btnText = document.getElementById('send-btn-text');
@@ -2134,26 +2220,40 @@ window.sendEmailWithPDF = async function() {
     
     const firstName = firstNameInput ? firstNameInput.value.trim() : '';
     const lastName = lastNameInput ? lastNameInput.value.trim() : '';
-    const email = emailInput.value.trim();
     const company = companyInput ? companyInput.value.trim() : '';
     const subscribe = newsletterCheckbox ? newsletterCheckbox.checked : false;
     
-    if (!email || !validateEmail(email)) {
-        errorSpan.textContent = 'Please enter a valid email address';
+    const emails = Array.from(emailInputs)
+        .map(input => input.value.trim())
+        .filter(email => email !== '');
+
+    if (emails.length === 0) {
+        errorSpan.textContent = 'Please enter at least one email address';
+        errorSpan.style.display = 'block';
+        return;
+    }
+
+    const invalidEmail = emails.find(email => !validateEmail(email));
+    if (invalidEmail) {
+        errorSpan.textContent = `"${invalidEmail}" is not a valid email address`;
         errorSpan.style.display = 'block';
         return;
     }
     
     errorSpan.style.display = 'none';
     sendBtn.disabled = true;
+    const originalBtnText = btnText.textContent;
     btnText.style.display = 'none';
     btnLoader.style.display = 'inline-flex';
+    if (btnLoader.querySelector('span')) {
+        btnLoader.querySelector('span').textContent = modalMode === 'download' ? 'Generating...' : 'Sending...';
+    }
     
     try {
         const reportData = prepareReportData();
-
+        const primaryEmail = emails[0];
         const payload = {
-            to_email: email,
+            to_email: emails, // Now passing an array
             reportData: reportData,
             summaryData: {
                 firstName: firstName || 'there',
@@ -2167,31 +2267,60 @@ window.sendEmailWithPDF = async function() {
             }
         };
 
-        showToast('Sending...', 'success');
+        if (modalMode === 'download') {
+            const response = await fetch('http://127.0.0.1:3006/generate-pdf', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ reportData, leadData: payload.summaryData, to_email: primaryEmail })
+            });
 
-        const emailResponse = await fetch('http://127.0.0.1:3006/send-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await emailResponse.json();
-
-        if (result.success) {
-            hideEmailModal();
-            showToast('Email sent successfully!', 'success');
-            emailInput.value = ''; 
+            if (!response.ok) throw new Error('Failed to generate PDF');
+            const result = await response.json();
+            
+            if (result.success) {
+                const byteCharacters = atob(result.pdfBase64);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `SAFE_Calculator_Report_${new Date().toISOString().split('T')[0]}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Report downloaded!', 'success');
+                hideEmailModal();
+            } else {
+                throw new Error(result.message);
+            }
         } else {
-            throw new Error(result.message);
+            showToast('Sending...', 'success');
+            const emailResponse = await fetch('http://127.0.0.1:3006/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await emailResponse.json();
+            if (result.success) {
+                hideEmailModal();
+                showToast('Email sent successfully!', 'success');
+            } else {
+                throw new Error(result.message);
+            }
         }
     } catch (error) {
-        console.error('Email Error:', error);
-        showToast('Server error. Is "node server.js" running?', 'error');
-        errorSpan.textContent = 'Error: Is the local Node server running?';
-        errorSpan.style.display = 'block';
+        console.error('Action Error:', error);
+        showToast('Error. Is the backend running?', 'error');
     } finally {
         sendBtn.disabled = false;
         btnText.style.display = 'inline';
+        btnText.textContent = originalBtnText;
         btnLoader.style.display = 'none';
     }
 };

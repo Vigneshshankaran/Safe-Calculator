@@ -211,12 +211,12 @@
           <div class="results-layout">
             <div class="flex justify-end mb-4 no-pdf">
               <div class="export-actions-mini">
-                <button class="btn-mini-export primary" onclick="downloadPDF()">
+                <button class="btn-mini-export primary" onclick="showEmailModal('download')">
                   Download report
                 </button>
                 <button
                   class="btn-mini-export secondary"
-                  onclick="showEmailModal()"
+                  onclick="showEmailModal('email')"
                 >
                   Email report
                 </button>
@@ -476,13 +476,25 @@
               />
             </div>
             <div class="input-group full-width">
-              <label class="field-label">Work Email</label>
-              <input
-                type="email"
-                id="email-input"
-                class="input"
-                placeholder="work@company.com"
-              />
+              <label class="field-label" id="recipient-label">Work Email(s)</label>
+              <div id="email-recipients-list">
+                <div class="recipient-row" id="recipient-row-0">
+                  <input
+                    type="email"
+                    class="input email-recipient-input"
+                    placeholder="work@company.com"
+                    required
+                  />
+                  <!-- Delete icon hidden for the first recipient -->
+                  <button class="btn-remove-recipient" style="visibility: hidden" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                  </button>
+                </div>
+              </div>
+              <button id="add-recipient-btn" type="button" class="btn-add-recipient" onclick="addRecipient()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Add recipient
+              </button>
               <span
                 id="email-error"
                 class="error-msg"
@@ -501,8 +513,14 @@
             <div class="checkbox-group no-pdf full-width">
               <label class="checkbox-container">
                 <input type="checkbox" id="newsletter-checkbox" checked />
-                <span class="checkbox-label">Send me newsletter and updates</span>
+                <span class="checkbox-label"
+                  >I would like to receive equity list updates from newspapers</span
+                >
               </label>
+              <div class="checkbox-note">
+                You can unsubscribe at any time. Updates are for information
+                purposes only.
+              </div>
             </div>
           </div>
           <div class="modal-footer-actions">
