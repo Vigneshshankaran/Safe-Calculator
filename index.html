@@ -19,11 +19,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
 
-  <body>
-    <header class="mb-12 mt-8">
-        <h1>SAFE Calculator</h1>
+  <body id="safe-calculator-root">
+    <style>
+      /* Style Isolation Firewall - Prevents Webflow/Global CSS overrides */
+      #safe-calculator-root p, 
+      #safe-calculator-root strong, 
+      #safe-calculator-root span,
+      #safe-calculator-root h1,
+      #safe-calculator-root h2,
+      #safe-calculator-root h3,
+      #safe-calculator-root label {
+        font-family: 'Inter', -apple-system, BlinkMacMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      }
+      #safe-calculator-root p {
+        margin-top: 0 !important;
+      }
+    </style>
+    <header class="mb-12 mt-8" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <h1 style="color: #0d0a40; font-weight: 500; letter-spacing: -0.01em; font-family: 'Inter', sans-serif !important; font-size: 52px; line-height: 62px; margin-bottom: 0.5rem;">SAFE Calculator</h1>
       </div>
-      <p class="header-description">
+      <p class="header-description" style="max-width: 640px; font-size: 1rem; color: #64748b; line-height: 1.6; margin-top: 0.5rem;">
         Analyze how SAFEs convert and impact founder dilution in a priced
         round.This tool uses YC SAFE conversion methodology.
       </p>
@@ -57,8 +72,8 @@
           <section id="cap-table-section">
             <div class="card-header">
               <div class="card-title-group">
-                <h2>Current cap table</h2>
-                <p>
+                <h2 style="color: #0d0a40; font-weight: 500; letter-spacing: -0.01em; font-family: 'Inter', sans-serif !important; font-size: 1.25rem;">Current cap table</h2>
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #0d0a40; margin-top: 0.4rem;">
                   Enter all issued shares, including those held by founders,
                   employees, and any existing option pools.
                 </p>
@@ -75,8 +90,8 @@
           <section id="safes-section">
             <div class="card-header">
               <div class="card-title-group">
-                <h2>SAFE terms</h2>
-                <p>
+                <h2 style="color: #0d0a40; font-weight: 500; letter-spacing: -0.01em; font-family: 'Inter', sans-serif !important; font-size: 1.25rem;">SAFE terms</h2>
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #0d0a40; margin-top: 0.4rem;">
                   SAFEs must be entered in the order raised. MFN
                   <span class="tooltip-trigger tooltip-compact">
                     <svg
@@ -113,15 +128,15 @@
           <section id="priced-round-section">
             <div class="card-header">
               <div class="card-title-group">
-                <h2>Priced round configuration</h2>
-                <p>
+                <h2 style="color: #0d0a40; font-weight: 500; letter-spacing: -0.01em; font-family: 'Inter', sans-serif !important; font-size: 1.25rem;">Priced round configuration</h2>
+                <p style="font-size: 0.9375rem; line-height: 1.6; color: #0d0a40; margin-top: 0.4rem;">
                   These terms determine how SAFEs convert and how new shares are
                   issued.
                 </p>
               </div>
             </div>
             <div class="config-card">
-              <label class="field-label">Pre-money valuation</label>
+              <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Pre-money valuation</label>
               <div class="input-with-symbol valuation-input-wrapper">
                 <span class="input-symbol">$</span>
                 <input
@@ -146,8 +161,8 @@
             <div class="option-pool-card">
               <div class="flex-between items-start">
                 <div>
-                  <label class="field-label mb-0">Target option pool</label>
-                  <p class="helper-text">
+                  <label class="field-label mb-0" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0;">Target option pool</label>
+                  <p class="helper-text" style="font-size: 0.75rem; font-weight: 400; line-height: 1.5; color: #9ca3af; margin-top: 4px;">
                     Enter your post-round target option pool
                   </p>
                 </div>
@@ -168,19 +183,20 @@
               <p
                 id="additional-options-val-text"
                 class="additional-shares-note"
+                style="color: rgba(99, 91, 255, 1); font-size: 12px; font-weight: 500; margin-top: 8px;"
               >
                 +0 shares will be added to reach the target
               </p>
               <p
                 id="option-pool-meets-target-note"
                 class="additional-shares-note"
-                style="display: none; margin-top: 4px; color: #64748b"
+                style="display: none; margin-top: 8px; color: #64748b; font-size: 12px; font-weight: 500;"
               >
                 Note: The post-round option pool already meets the target.
               </p>
             </div>
             <div class="input-group mb-24">
-              <label class="field-label">Round name</label>
+              <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Round name</label>
               <input
                 class="input"
                 id="round-name-input"
@@ -189,7 +205,7 @@
               />
             </div>
             <div class="investors-header">
-              <h3>Round investors</h3>
+              <h3 style="font-size: 1rem; font-weight: 500; margin: 0; color: #0d0a40; letter-spacing: -0.01em; font-family: 'Inter', sans-serif !important;">Round investors</h3>
               <button class="btn btn-primary" onclick="addRow('series')">
                 <svg class="btn-icon-1"><use href="#icon-plus"></use></svg>
                 Add
@@ -222,10 +238,10 @@
                 </button>
               </div>
             </div>
-            <p class="mb-4 text-muted disclosure-note">
+            <p class="mb-4 text-muted disclosure-note" style="font-size: 0.6rem; color: rgba(100, 116, 139, 0.6); margin-bottom: 1rem; margin-top: 0.5rem;">
                 Note: All “before <span class="display-round-name"></span>” and “after <span class="display-round-name"></span>” figures assume all SAFEs have converted. If there are no SAFEs, the figures reflect the cap table before the priced round.
             </p>
-            <div class="founder-outcome-label mb-4">
+            <div class="founder-outcome-label mb-4" style="font-size: 1.25rem; font-weight: 500; color: #0d0a40; margin-bottom: 1rem; font-family: 'Inter', sans-serif;">
                 Impact of
                 <span class="display-round-name"></span>
                 on founder(s)
@@ -235,7 +251,7 @@
                 <span id="founder-ownership-val" class="stat-value purple"
                   >0.00%</span
                 >
-                <span class="stat-label"
+                <span class="stat-label" style="font-size: 0.75rem; color: #444266; font-weight: 400; display: block; margin-top: 4px; font-family: 'Inter', sans-serif;"
                   >Ownership after <span class="display-round-name"></span
                 ></span>
               </div>
@@ -243,7 +259,7 @@
                 <span id="founder-dilution-val" class="stat-value grey"
                   >0.00%</span
                 >
-                <span class="stat-label"
+                <span class="stat-label" style="font-size: 0.75rem; color: #444266; font-weight: 400; display: block; margin-top: 4px; font-family: 'Inter', sans-serif;"
                   >Founder dilution from <span class="display-round-name"></span
                   ><span class="tooltip-trigger">
                     <svg
@@ -271,16 +287,16 @@
 
             <div class="secondary-stats-row">
               <div class="stat-small">
-                <span class="stat-label-caps">Post-money</span>
-                <span id="post-money-val" class="stat-value-small">$0</span>
+                <span class="stat-label-caps" style="font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #444266; font-family: 'Inter', sans-serif;">Post-money</span>
+                <span id="post-money-val" class="stat-value-small" style="font-size: 1.125rem; font-weight: 500; color: #0d0a40;">$0</span>
               </div>
-              <div class="stat-small border-left">
-                <span class="stat-label-caps">Price per share (PPS)</span>
-                <span id="round-pps-val" class="stat-value-small">$0.000</span>
+              <div class="stat-small border-left" style="border-left: 1px solid rgba(0, 0, 0, 0.1); padding-left: 1.5rem;">
+                <span class="stat-label-caps" style="font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #444266; font-family: 'Inter', sans-serif;">Price per share (PPS)</span>
+                <span id="round-pps-val" class="stat-value-small" style="font-size: 1.125rem; font-weight: 500; color: #0d0a40;">$0.000</span>
               </div>
-              <div class="stat-small border-left">
-                <span class="stat-label-caps">Total shares post-round</span>
-                <span id="total-post-shares-val" class="stat-value-small"
+              <div class="stat-small border-left" style="border-left: 1px solid rgba(0, 0, 0, 0.1); padding-left: 1.5rem;">
+                <span class="stat-label-caps" style="font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #444266; font-family: 'Inter', sans-serif;">Total shares post-round</span>
+                <span id="total-post-shares-val" class="stat-value-small" style="font-size: 1.125rem; font-weight: 500; color: #0d0a40;"
                   >0</span
                 >
               </div>
@@ -289,13 +305,13 @@
 
           <div class="results-charts-row">
             <div class="chart-column">
-              <div class="chart-title">
+              <div class="chart-title" style="font-size: 1rem; font-weight: 500; color: #111827; margin-bottom: 1rem; text-align: center; font-family: 'Inter', sans-serif;">
                 Ownership split after <span class="display-round-name"></span>
               </div>
               <div id="pie-chart-container" class="donut-container"></div>
             </div>
             <div class="chart-column">
-              <div class="chart-title">
+              <div class="chart-title" style="font-size: 1rem; font-weight: 500; color: #111827; margin-bottom: 1rem; text-align: center; font-family: 'Inter', sans-serif;">
                 Founder ownership before vs after
                 <span class="display-round-name"></span>
               </div>
@@ -304,9 +320,9 @@
           </div>
         </section>
         <section id="ai-advisor-section">
-          <div class="ai-insights-box">
-            <div class="ai-header-group">
-              <div class="ai-icon-circle">
+          <div class="ai-insights-box" style="background-color: #ffffff; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.1); padding: 24px; box-shadow: 0px 1px 2px -1px rgba(0, 0, 0, 0.08), 0px 1px 3px rgba(0, 0, 0, 0.08);">
+            <div class="ai-header-group" style="display: flex; gap: 12px; align-items: center; margin-bottom: 24px;">
+              <div class="ai-icon-circle" style="width: 48px; height: 48px; border-radius: 24px; background-color: rgba(99, 91, 255, 0.1); display: flex; align-items: center; justify-content: center;">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="28"
@@ -329,37 +345,40 @@
                   />
                 </svg>
               </div>
-              <div class="ai-title-stack">
-                <div class="ai-main-title">Round summary</div>
+              <div class="ai-title-stack" style="display: flex; flex-direction: column; gap: 2px;">
+                <div class="ai-main-title" style="font-size: 16px; font-weight: 500; color: #111827; font-family: 'Inter', sans-serif;">Round summary</div>
               </div>
             </div>
-            <div id="ai-insights-container" class="ai-insights-content"></div>
+            <div id="ai-insights-container" class="ai-insights-content" style="font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 14px; color: #374151;"></div>
           </div>
         </section>
         <section id="breakdown-section">
           <div class="table-container">
-            <p class="subsection-title">
+            <p class="subsection-title" style="font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; color: #444266; margin-bottom: 1rem;">
               Cap table after <span class="display-round-name"></span>
             </p>
             <div class="table-wrapper-responsive">
               <table>
                 <thead>
                   <tr>
-                    <th class="col-name">Category</th>
-                    <th class="col-shares-pre">Shares (Before)</th>
-                    <th class="col-shares-post">Shares (After)</th>
+                    <th class="col-name" style="font-size: 0.75rem; font-weight: 500; color: #444266; text-align: left; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 12px 16px; font-family: 'Inter', sans-serif;">Category</th>
+                    <th class="col-shares-pre" style="font-size: 0.75rem; font-weight: 500; color: #444266; text-align: right; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 12px 16px; font-family: 'Inter', sans-serif;">Shares (Before)</th>
+                    <th class="col-shares-post" style="font-size: 0.75rem; font-weight: 500; color: #444266; text-align: right; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 12px 16px; font-family: 'Inter', sans-serif;">Shares (After)</th>
                     <th
                       class="text-right text-muted font-medium py-3 px-4 col-pct-pre"
+                      style="font-size: 0.75rem; font-weight: 500; color: #444266; text-align: right; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 12px 16px; font-family: 'Inter', sans-serif;"
                     >
                       % (Before)
                     </th>
                     <th
                       class="text-right text-brand font-bold py-3 px-4 col-pct-post"
+                      style="font-size: 0.75rem; font-weight: 700; color: rgba(99, 91, 255, 1); text-align: right; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 12px 16px; font-family: 'Inter', sans-serif;"
                     >
                       % (After)
                     </th>
                     <th
                       class="text-right text-muted font-medium py-3 px-4 hide-on-mobile col-pps"
+                      style="font-size: 0.75rem; font-weight: 500; color: #444266; text-align: right; border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 12px 16px; font-family: 'Inter', sans-serif;"
                     >
                       PPS
                     </th>
@@ -448,7 +467,7 @@
       <div class="modal-dialog">
         <div class="modal-header">
           <div>
-            <h3 class="modal-title" id="modal-title">Get your copy of ownership report on email</h3>
+            <h3 class="modal-title" id="modal-title" style="font-size: 18px; font-weight: 500; color: #0d0a40; margin: 0; letter-spacing: -0.01em; font-family: 'Inter', sans-serif !important;">Get your copy of ownership report on email</h3>
            
           </div>
           <button class="modal-close" onclick="hideEmailModal()">
@@ -458,7 +477,7 @@
         <div class="modal-body">
           <div class="modal-form-grid">
             <div class="input-group">
-              <label class="field-label">First name</label>
+              <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">First name</label>
               <input
                 type="text"
                 id="first-name-input"
@@ -467,7 +486,7 @@
               />
             </div>
             <div class="input-group">
-              <label class="field-label">Last name</label>
+              <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Last name</label>
               <input
                 type="text"
                 id="last-name-input"
@@ -476,7 +495,7 @@
               />
             </div>
             <div class="input-group full-width">
-              <label class="field-label" id="recipient-label">Work email(s)</label>
+              <label class="field-label" id="recipient-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Work email(s)</label>
               <div id="email-recipients-list">
                 <div class="recipient-row" id="recipient-row-0">
                   <input
@@ -502,7 +521,7 @@
               ></span>
             </div>
             <div class="input-group full-width">
-              <label class="field-label">Company name</label>
+              <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Company name</label>
               <input
                 type="text"
                 id="company-input"
@@ -510,14 +529,14 @@
                 placeholder="Company Name"
               />
             </div>
-            <div class="checkbox-group no-pdf full-width">
-              <label class="checkbox-container">
-                <input type="checkbox" id="newsletter-checkbox" checked />
+            <div class="checkbox-group no-pdf full-width" style="grid-column: span 2; display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+              <label class="checkbox-container" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: #444266;">
+                <input type="checkbox" id="newsletter-checkbox" checked style="width: 16px; height: 16px; cursor: pointer;" />
                 <span class="checkbox-label"
                   >I'd like to receive news and updates from EquityList</span
                 >
               </label>
-              <div class="checkbox-note">
+              <div class="checkbox-note" style="font-size: 11px; color: #9ca3af; line-height: 1.4; margin-left: 28px;">
                 You can unsubscribe at anytime.
               </div>
             </div>
@@ -551,7 +570,7 @@
         </div>
         <div class="row-card-grid-shareholder">
           <div>
-            <label class="field-label row-field-label">Category</label>
+            <label class="field-label row-field-label" style="display: block; font-size: 10px; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 4px;">Category</label>
             <select class="select row-category">
               <option value="Founder">Founder</option>
               <option value="Option pool">Option pool</option>
@@ -560,13 +579,13 @@
             </select>
           </div>
           <div>
-            <label class="field-label row-field-label">Shares</label>
+            <label class="field-label row-field-label" style="display: block; font-size: 10px; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 4px; font-family: 'Inter', sans-serif;">Shares</label>
             <div class="flex items-center">
               <input class="input row-input-right row-shares" type="text" />
-              <span class="input-suffix">shares</span>
+              <span class="input-suffix" style="font-size: 13px; color: #9ca3af; margin-left: 8px; font-family: 'Inter', sans-serif;">shares</span>
             </div>
           </div>
-          <div class="pct-badge badge-fixed-height row-pct"></div>
+          <div class="pct-badge badge-fixed-height row-pct" style="font-family: 'Inter', sans-serif;"></div>
         </div>
       </div>
     </template>
@@ -579,7 +598,7 @@
         </div>
         <div class="row-card-grid-safe">
           <div>
-            <label class="field-label">Investment</label>
+            <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Investment</label>
             <div class="input-with-symbol">
               <span class="input-symbol">$</span>
               <input
@@ -589,21 +608,21 @@
             </div>
           </div>
           <div>
-            <label class="field-label">Valuation cap</label>
+            <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Valuation cap</label>
             <div class="input-with-symbol">
               <span class="input-symbol">$</span>
               <input class="input row-input-right safe-cap" type="text" />
             </div>
           </div>
           <div>
-            <label class="field-label">Discount</label>
-            <div class="input-with-symbol-right">
-              <input class="input safe-discount-input" type="text" />
-              <span class="input-symbol">%</span>
+            <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">Discount</label>
+            <div class="input-with-symbol-right" style="position: relative; display: flex; align-items: center;">
+              <input class="input safe-discount-input" type="text" style="padding-right: 24px;" />
+              <span class="input-symbol" style="position: absolute; right: 12px; color: #9ca3af; font-size: 14px; font-family: 'Inter', sans-serif;">%</span>
             </div>
           </div>
           <div>
-            <label class="field-label">Type</label>
+            <label class="field-label" style="display: block; font-size: 0.75rem; font-weight: 500; line-height: 16px; color: #0d0a40; letter-spacing: 0.05em; margin-top: 0; margin-bottom: 0.5rem;">Type</label>
             <select class="select row-select safe-type">
               <option value="post">Post-money</option>
               <option value="pre">Pre-money</option>
@@ -674,21 +693,23 @@
 
     <template id="breakdown-row-template">
       <tr class="group investor-row">
-        <td class="col-name">
-          <div class="flex-cell-content">
-            <span class="font-medium text-dark row-display-name"></span>
-            <span class="row-tags"></span>
+        <td class="col-name" style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); text-align: left;">
+          <div class="flex-cell-content" style="display: flex; align-items: center; gap: 8px;">
+            <span class="font-medium text-dark row-display-name" style="font-weight: 500; color: #0f172a; font-family: 'Inter', sans-serif; font-size: 14px;"></span>
+            <span class="row-tags" style="font-family: 'Inter', sans-serif;"></span>
           </div>
         </td>
-        <td class="text-right text-muted row-pre-shares col-shares-pre"></td>
+        <td class="text-right text-muted row-pre-shares col-shares-pre" style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); text-align: right; color: #444266; font-size: 14px; font-family: 'Inter', sans-serif;"></td>
         <td
           class="text-right font-medium text-dark row-post-shares col-shares-post"
+          style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); text-align: right; color: #0f172a; font-weight: 500; font-size: 14px; font-family: 'Inter', sans-serif;"
         ></td>
-        <td class="text-right text-muted row-pre-pct col-pct-pre"></td>
+        <td class="text-right text-muted row-pre-pct col-pct-pre" style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); text-align: right; color: #444266; font-size: 14px; font-family: 'Inter', sans-serif;"></td>
         <td
           class="text-right font-medium text-brand row-post-pct col-pct-post"
+          style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); text-align: right; color: rgba(99, 91, 255, 1); font-weight: 500; font-size: 14px; font-family: 'Inter', sans-serif;"
         ></td>
-        <td class="text-right text-muted hide-on-mobile row-pps col-pps"></td>
+        <td class="text-right text-muted hide-on-mobile row-pps col-pps" style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); text-align: right; color: #444266; font-size: 14px; font-family: 'Inter', sans-serif;"></td>
       </tr>
     </template>
 

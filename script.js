@@ -909,8 +909,8 @@ const renderShareholders = (totalSharesS0) => {
     const footer = document.getElementById("cap-table-footer");
     footer.className = "card-footer-total";
     footer.innerHTML = `
-        <span>Total fully diluted shares</span>
-        <span class="footer-total-value">${formatNumberWithCommas(totalSharesS0)}</span>
+        <span style="font-family: 'Inter', sans-serif; font-size: 14px; color: #444266;">Total fully diluted shares</span>
+        <span class="footer-total-value" style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; color: #0d0a40;">${formatNumberWithCommas(totalSharesS0)}</span>
     `;
 };
 
@@ -1025,8 +1025,8 @@ const renderSAFEs = (errors = {}) => {
     }
     
     totalRow.innerHTML = `
-        <span>Total SAFE investment</span>
-        <span class="footer-total-value">${formatUSDWithCommas(totalInv)}</span>
+        <span style="font-family: 'Inter', sans-serif; font-size: 14px; color: #444266;">Total SAFE investment</span>
+        <span class="footer-total-value" style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; color: #0d0a40;">${formatUSDWithCommas(totalInv)}</span>
     `;
 };
 
@@ -1071,8 +1071,8 @@ const renderSeriesInvestors = () => {
         seriesSection.appendChild(totalRow);
     }
     totalRow.innerHTML = `
-        <span>Total raised</span>
-        <span class="footer-total-value">${formatUSDWithCommas(totalInv)}</span>
+        <span style="font-family: 'Inter', sans-serif; font-size: 14px; color: #444266;">Total raised</span>
+        <span class="footer-total-value" style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; color: #0d0a40;">${formatUSDWithCommas(totalInv)}</span>
     `;
 };
 
@@ -1167,13 +1167,13 @@ const renderBreakdownTable = (preData, postData, pps) => {
         if (post.isPricedOrSafe && post.category === "Investor") {
             const safeMatch = postData.safes?.find(s => s.id === id);
             if (safeMatch) {
-                if (safeMatch.isMFN) tagsHtml += `<span class="tag tag-mfn">MFN SAFE</span>`;
-                else if (safeMatch.conversionType === "pre") tagsHtml += `<span class="tag tag-pre">Pre-money SAFE</span>`;
-                else tagsHtml += `<span class="tag tag-post">Post-money SAFE</span>`;
+                if (safeMatch.isMFN) tagsHtml += `<span class="tag tag-mfn" style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #f1f5f9; color: #475569; font-family: 'Inter', sans-serif;">MFN SAFE</span>`;
+                else if (safeMatch.conversionType === "pre") tagsHtml += `<span class="tag tag-pre" style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #f1f5f9; color: #475569; font-family: 'Inter', sans-serif;">Pre-money SAFE</span>`;
+                else tagsHtml += `<span class="tag tag-post" style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #f1f5f9; color: #475569; font-family: 'Inter', sans-serif;">Post-money SAFE</span>`;
             }
         }
         if (post.id === "UnusedOptionsPool" && postSharesValid && pre.shares >= 0 && post.shares > pre.shares + 1) {
-            tagsHtml += `<span class="tag tag-topup">Pool top-up</span>`;
+            tagsHtml += `<span class="tag tag-topup" style="font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #fef2f2; color: #dc2626; font-family: 'Inter', sans-serif;">Pool top-up</span>`;
         }
         clone.querySelector(".row-tags").innerHTML = tagsHtml;
 
@@ -1193,12 +1193,12 @@ const renderBreakdownTable = (preData, postData, pps) => {
     totalTr.style.backgroundColor = "var(--slate-50)";
 
     totalTr.innerHTML = `
-        <td class="col-name" style="display: table-cell;">Total</td>
-        <td class="text-right pre-value col-shares-pre">${safeFormatNumber(preData.total.shares)}</td>
-        <td class="text-right post-value post-shares-value col-shares-post">${safeFormatNumber(postData.total.shares)}</td>
-        <td class="text-right pre-value col-pct-pre">${preSharesValid && preData.total.shares > 0 ? "100.00%" : "—"}</td>
-        <td class="text-right post-value post-pct-value col-pct-post">${postSharesValid && postData.total.shares > 0 ? "100.00%" : "—"}</td>
-        <td class="text-right col-pps"></td>
+        <td class="col-name" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #0d0a40; font-family: 'Inter', sans-serif; font-size: 14px; text-align: left;">Total</td>
+        <td class="text-right pre-value col-shares-pre" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #444266; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${safeFormatNumber(preData.total.shares)}</td>
+        <td class="text-right post-value post-shares-value col-shares-post" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #0d0a40; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${safeFormatNumber(postData.total.shares)}</td>
+        <td class="text-right pre-value col-pct-pre" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #444266; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${preSharesValid && preData.total.shares > 0 ? "100.00%" : "—"}</td>
+        <td class="text-right post-value post-pct-value col-pct-post" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: rgba(99, 91, 255, 1); font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${postSharesValid && postData.total.shares > 0 ? "100.00%" : "—"}</td>
+        <td class="text-right col-pps" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #444266; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;"></td>
     `;
     container.appendChild(totalTr);
 };
@@ -1454,30 +1454,30 @@ const renderAIAdvisor = (preRound, postRound, pricedConversion, state, strictlyP
     const preMoney = state.preMoney;
 
     if (preMoney <= 0 || newMoneyRaised <= 0) {
-        container.innerHTML = `<p class="card-subtext">Insights will appear once you enter your priced round terms.</p>`;
+        container.innerHTML = `<p class="card-subtext" style="font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 400; line-height: 1.5; color: #9ca3af; margin: 0.25rem 0 0 0;">Insights will appear once you enter your priced round terms.</p>`;
         return;
     }
 
 
     container.innerHTML = `
-        <div class="ai-skeleton-loader">
-            <div class="ai-skeleton-line" style="width: 100%;"></div>
-            <div class="ai-skeleton-line" style="width: 85%;"></div>
-            <div class="ai-skeleton-line" style="width: 60%;"></div>
+        <div class="ai-skeleton-loader" style="display: flex; flex-direction: column; gap: 0.75rem; padding: 0.5rem 0;">
+            <div class="ai-skeleton-line" style="width: 100%; height: 12px; background-color: #e2e8f0; border-radius: 4px;"></div>
+            <div class="ai-skeleton-line" style="width: 85%; height: 12px; background-color: #e2e8f0; border-radius: 4px;"></div>
+            <div class="ai-skeleton-line" style="width: 60%; height: 12px; background-color: #e2e8f0; border-radius: 4px;"></div>
         </div>
     `;
 
 
     aiLoadingTimeout = setTimeout(() => {
         const insights = [];
-        const investment = formatUSDWithCommas(newMoneyRaised);
-        const preMoneyStr = formatUSDWithCommas(preMoney);
+        const investment = ` <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${formatUSDWithCommas(newMoneyRaised)}</strong>`;
+        const preMoneyStr = ` <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${formatUSDWithCommas(preMoney)}</strong>`;
 
         const foundersPost = postRound.common.filter((c) => c.category === "Founder");
         const totalFounderPctPost = foundersPost.reduce((a, f) => a + f.ownershipPct, 0);
         const totalFounderPctPre = strictlyPreFounderPct !== undefined ? strictlyPreFounderPct : 0;
 
-        insights.push(`<p>You are modeling a <strong>${state.roundName || "priced round"}</strong> round raising <strong>${investment}</strong> at a <strong>${preMoneyStr}</strong> pre-money valuation. Founder ownership changes from <strong>${safeFormatPercent(totalFounderPctPre)}</strong> to <strong>${safeFormatPercent(totalFounderPctPost)}</strong> post ${state.roundName || "priced round"}.</p>`);
+        insights.push(`<p style="margin: 0 0 1.25rem 0; font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 14px; color: #374151;">You are modeling a <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${state.roundName || "priced round"}</strong> round raising ${investment} at a ${preMoneyStr} pre-money valuation. Founder ownership changes from <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${safeFormatPercent(totalFounderPctPre)}</strong> to <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${safeFormatPercent(totalFounderPctPost)}</strong> post ${state.roundName || "priced round"}.</p>`);
 
         const safesCount = state.rowData.filter(r => r.type === CapTableRowType.Safe).length;
         const totalSafeInvestment = state.rowData
@@ -1485,19 +1485,19 @@ const renderAIAdvisor = (preRound, postRound, pricedConversion, state, strictlyP
             .reduce((sum, s) => sum + s.investment, 0);
 
         if (safesCount > 0) {
-            insights.push(`<p>${safesCount} SAFE${safesCount > 1 ? 's' : ''} totaling ${formatUSDWithCommas(totalSafeInvestment)} will convert.</p>`);
+            insights.push(`<p style="margin: 0 0 1.25rem 0; font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 14px; color: #374151;">${safesCount} SAFE${safesCount > 1 ? 's' : ''} totaling <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${formatUSDWithCommas(totalSafeInvestment)}</strong> will convert.</p>`);
         }
         if (totalFounderPctPre >= 0.5 && totalFounderPctPost < 0.5) {
             insights.push(`
-                <div class="insight-item">
-                    <div class="insight-danger">Founders have dropped below 50% majority ownership in this round.</div>
+                <div class="insight-item" style="color: #0d0a40; margin: 0 0 1.25rem 0; font-family: 'Inter', sans-serif;">
+                    <div class="insight-danger" style="color: #dc2626; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 20px;">Founders have dropped below 50% majority ownership in this round.</div>
                 </div>
             `);
         }
         if (pricedConversion.increaseInOptionsPool > 0) {
             insights.push(`
-                <div class="insight-item">
-                    <div>The model includes an option pool top-up to reach the target of <strong>${state.targetOptionsPool}%</strong>, which issued additional shares pre ${state.roundName || "priced round"}.</div>
+                <div class="insight-item" style="color: #0d0a40; margin: 0 0 1.25rem 0; font-family: 'Inter', sans-serif;">
+                    <div style="font-family: 'Inter', sans-serif; line-height: 1.6; font-size: 14px; color: #374151;">The model includes an option pool top-up to reach the target of <strong style="color: #0d0a40; font-weight: 600; font-family: 'Inter', sans-serif;">${state.targetOptionsPool}%</strong>, which issued additional shares pre ${state.roundName || "priced round"}.</div>
                 </div>
             `);
         }
@@ -2076,7 +2076,7 @@ window.downloadPDF = async function() {
         const reportData = prepareReportData();
 
         console.log("Fetching from backend at http://127.0.0.1:3006/generate-pdf...");
-        const response = await fetch('http://127.0.0.1:3006/generate-pdf', {
+        const response = await fetch('https://safe-calculator-backend-production-ebb2.up.railway.app/generate-pdf', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ reportData })
@@ -2273,7 +2273,7 @@ window.sendEmailWithPDF = async function() {
         };
 
         if (modalMode === 'download') {
-            const response = await fetch('http://127.0.0.1:3006/generate-pdf', {
+            const response = await fetch('https://safe-calculator-backend-production-ebb2.up.railway.app/generate-pdf', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ reportData, leadData: payload.summaryData, to_email: primaryEmail })
@@ -2305,7 +2305,7 @@ window.sendEmailWithPDF = async function() {
             }
         } else {
             showToast('Sending...', 'success');
-            const emailResponse = await fetch('http://127.0.0.1:3006/send-email', {
+            const emailResponse = await fetch('https://safe-calculator-backend-production-ebb2.up.railway.app/send-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
