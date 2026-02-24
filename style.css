@@ -669,6 +669,7 @@ header.mb-12 {
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
+  cursor: pointer;
 }
 
 .btn-reset svg {
@@ -676,12 +677,13 @@ header.mb-12 {
 }
 
 .btn-reset:hover {
-  color: var(--brand-indigo) !important;
-  background: rgba(37, 99, 235, 0.05) !important;
+  /* Hover effects removed */
+  color: var(--text-light) !important;
 }
 
 .btn-reset:hover svg {
-  color: var(--brand-indigo) !important;
+  /* Hover effects removed */
+  color: var(--text-muted) !important;
 }
 
 .split-layout-wrapper {
@@ -1166,13 +1168,17 @@ input[type="checkbox"] {
 .table-container {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  margin-top: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto 0 auto;
   padding-top: 2rem;
 }
 
 .table-wrapper-responsive {
   width: 100%;
   overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 /* "Ownership Breakdown" Label */
@@ -1182,14 +1188,17 @@ input[type="checkbox"] {
   letter-spacing: 0.05em; /* tracking-wider */
   color: var(--text-muted); /* text-muted-foreground */
   margin-bottom: 1rem;
+  text-align: center;
   border-bottom: none;
   padding-bottom: 0;
 }
 
 table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   font-size: 0.75rem; /* text-xs */
+  margin: 0 auto;
 }
 
 thead {
@@ -1204,7 +1213,7 @@ th {
   font-weight: 500; /* font-medium */
   color: var(--text-muted); /* text-muted-foreground */
   padding-bottom: 0.5rem; /* pb-2 */
-  text-align: right;
+  text-align: center !important;
   border-bottom: none;
   letter-spacing: normal;
   text-transform: none;
@@ -1213,12 +1222,12 @@ th {
 }
 
 th:first-child {
-  text-align: left;
+  text-align: center !important;
   padding-left: 0;
 }
 
 th.text-right {
-  text-align: right;
+  text-align: center !important;
 }
 
 tbody tr {
@@ -1235,6 +1244,7 @@ td {
   font-weight: 400;
   padding: 1rem 0; /* Increased from 0.625rem for better spacing */
   vertical-align: middle;
+  text-align: center !important;
   color: var(--text-dark);
   border-bottom: none;
 }
@@ -1245,11 +1255,19 @@ td:first-child {
 
 /* First cell left padding */
 td:first-child {
-  padding-left: 0.5rem;
+  padding-left: 0; /* Removed offset for better centering */
 }
 
 tr {
   transition: background-color 0.2s ease;
+}
+
+/* Specific centering overrides for breakdown table cells */
+.table-wrapper-responsive td.text-right,
+.table-wrapper-responsive th.text-right,
+.table-wrapper-responsive td:first-child,
+.table-wrapper-responsive th:first-child {
+    text-align: center !important;
 }
 
 tr:hover td {

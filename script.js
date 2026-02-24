@@ -1193,12 +1193,12 @@ const renderBreakdownTable = (preData, postData, pps) => {
     totalTr.style.backgroundColor = "var(--slate-50)";
 
     totalTr.innerHTML = `
-        <td class="col-name" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #0d0a40; font-family: 'Inter', sans-serif; font-size: 14px; text-align: left;">Total</td>
-        <td class="text-right pre-value col-shares-pre" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #444266; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${safeFormatNumber(preData.total.shares)}</td>
-        <td class="text-right post-value post-shares-value col-shares-post" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #0d0a40; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${safeFormatNumber(postData.total.shares)}</td>
-        <td class="text-right pre-value col-pct-pre" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #444266; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${preSharesValid && preData.total.shares > 0 ? "100.00%" : "—"}</td>
-        <td class="text-right post-value post-pct-value col-pct-post" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: rgba(99, 91, 255, 1); font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;">${postSharesValid && postData.total.shares > 0 ? "100.00%" : "—"}</td>
-        <td class="text-right col-pps" style="padding: 12px 16px; border-top: 2px solid #0d0a40; font-weight: 600; color: #444266; font-family: 'Inter', sans-serif; font-size: 14px; text-align: right;"></td>
+        <td class="col-name">Total</td>
+        <td class="text-right pre-value col-shares-pre">${safeFormatNumber(preData.total.shares)}</td>
+        <td class="text-right post-value post-shares-value col-shares-post">${safeFormatNumber(postData.total.shares)}</td>
+        <td class="text-right pre-value col-pct-pre">${preSharesValid && preData.total.shares > 0 ? "100.00%" : "—"}</td>
+        <td class="text-right post-value post-pct-value col-pct-post">${postSharesValid && postData.total.shares > 0 ? "100.00%" : "—"}</td>
+        <td class="text-right col-pps"></td>
     `;
     container.appendChild(totalTr);
 };
@@ -2076,7 +2076,7 @@ window.downloadPDF = async function() {
         const reportData = prepareReportData();
 
         console.log("Fetching from backend at http://127.0.0.1:3006/generate-pdf...");
-        const response = await fetch('https://safe-calculator-backend-production-ebb2.up.railway.app/generate-pdf', {
+        const response = await fetch('http://127.0.0.1:3005/generate-pdf', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ reportData })
@@ -2152,11 +2152,11 @@ window.showEmailModal = function(mode = 'email') {
     const modalTitle = document.getElementById('modal-title');
 
     if (btnText) {
-        btnText.textContent = mode === 'download' ? 'Download Report' : 'Send the report';
+        btnText.textContent = mode === 'download' ? 'Download the report' : ' the report';
     }
 
     if (modalTitle) {
-        modalTitle.textContent = mode === 'download' ? 'Get your copy now' : 'Get your copy of ownership report on email';
+        modalTitle.textContent = mode === 'download' ? 'Download the ownership report' : 'Get a copy of ownership report on your email';
     }
 
     if (recipientLabel) {
@@ -2273,7 +2273,7 @@ window.sendEmailWithPDF = async function() {
         };
 
         if (modalMode === 'download') {
-            const response = await fetch('https://safe-calculator-backend-production-ebb2.up.railway.app/generate-pdf', {
+            const response = await fetch('https://safe-calculator-backend-production-73fe.up.railway.app/generate-pdf', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ reportData, leadData: payload.summaryData, to_email: primaryEmail })
@@ -2305,7 +2305,7 @@ window.sendEmailWithPDF = async function() {
             }
         } else {
             showToast('Sending...', 'success');
-            const emailResponse = await fetch('https://safe-calculator-backend-production-ebb2.up.railway.app/send-email', {
+            const emailResponse = await fetch('https://safe-calculator-backend-production-73fe.up.railway.app/send-email', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
